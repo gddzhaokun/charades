@@ -9,10 +9,13 @@
 https://gddzhaokun.github.io/charades/
 ```
 
-**方式二 · raw 直链**（无 Pages 时可用）
+**方式二 · 本地打开**（下载 `index.html` 后用浏览器打开，插图走相对路径）
 ```
-https://raw.githubusercontent.com/gddzhaokun/charades/main/charades-cdn.html
+https://gddzhaokun.github.io/charades/index.html
 ```
+
+> ⚠️ 插图**不使用** `raw.githubusercontent.com` 外链 —— 该域名在部分国内移动网络不可达，会导致全部裂图。
+> 插图改为 **Pages 同域相对路径** `assets/img/NN.webp`，与 HTML 同源，手机端可正常加载。
 
 下载后用浏览器打开即可，手机端上下滑动翻页。
 
@@ -20,7 +23,7 @@ https://raw.githubusercontent.com/gddzhaokun/charades/main/charades-cdn.html
 
 | 路径 | 说明 |
 |------|------|
-| `charades-cdn.html` | 游戏页（36.7 KB），插图走 raw 外链 |
+| `charades-cdn.html` | 游戏页（33.8 KB），插图走 Pages 同域相对路径 `assets/img/NN.webp` |
 | `assets/img/NN.webp` | 50 张插图，384×384 白底 WebP，共 521 KB |
 | `assets/img/manifest.json` | 逐题索引：word / cat / file / bytes / fallback |
 | `src/build.py` | HTML 生成器（`--mode=inline\|cdn`） |

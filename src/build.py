@@ -8,11 +8,16 @@ Reads:
 Modes:
   --mode=inline  (default) — images inlined as base64 data URIs
                          -> charades-v4.html   (self-contained, ~730 KB)
-  --mode=cdn               — images referenced by raw.githubusercontent.com URL
+  --mode=cdn               — images referenced via BASE_URL (default:
+                           same-origin relative path 'assets/img/NN.webp',
+                           works on GitHub Pages where
+                           raw.githubusercontent.com is blocked on CN
+                           mobile networks)
                          -> charades-cdn.html  (~35 KB, needs network)
 
 Usage:
   python3 build.py                        # inline (default, unchanged behaviour)
+  python3 build.py --mode=cdn            # relative paths (Pages same-origin)
   python3 build.py --mode=cdn \
       --base-url=https://raw.githubusercontent.com/gddzhaokun/charades/main
 """
@@ -23,7 +28,11 @@ questions = json.load(open(os.path.join(BASE, 'questions.json')))
 
 # ---- CLI args ----------------------------------------------------------
 MODE = 'inline'
-BASE_URL = 'https://raw.githubusercontent.com/gddzhaokun/charades/main'
+# Default: relative path (same-origin with the HTML).  This works on
+# GitHub Pages (https://gddzhaokun.github.io/charades/) because the
+# assets/ directory is served by Pages itself, while
+# raw.githubusercontent.com is unreachable on many CN mobile networks.
+BASE_URL = ''
 for _a in sys.argv[1:]:
     if _a.startswith('--mode='):
         MODE = _a.split('=', 1)[1]
@@ -42,10 +51,20 @@ b64 = {int(k): v for k, v in b64.items()}
 
 # CDN mode needs the manifest to know which questions really have a file
 # (and which fell back to emoji).  Optional — missing manifest => all emoji.
-_manifest_path = os.path.join(BASE, 'manifest.json')
-if not os.path.exists(_manifest_path):
-    _manifest_path = os.path.join(BASE, 'assets', 'img', 'manifest.json')
-manifest = json.load(open(_manifest_path)) if os.path.exists(_manifest_path) else {}
+# Search order: ./manifest.json, ./assets/img/manifest.json,
+#               ../manifest.json, ../assets/img/manifest.json
+# (this script lives in src/, the manifest lives in assets/img/ at repo root)
+_manifest_path = None
+for _cand in (
+    os.path.join(BASE, 'manifest.json'),
+    os.path.join(BASE, 'assets', 'img', 'manifest.json'),
+    os.path.join(BASE, '..', 'manifest.json'),
+    os.path.join(BASE, '..', 'assets', 'img', 'manifest.json'),
+):
+    if os.path.exists(_cand):
+        _manifest_path = _cand
+        break
+manifest = json.load(open(_manifest_path)) if _manifest_path else {}
 
 # NOTE: the #4326 copy-paste bug (question 36 「理发师」 carrying question 34
 # 「老师」's hints 粉笔/上课/教书) is fixed directly in questions.json, so the
@@ -246,7 +265,10 @@ def build():
         if MODE == 'cdn':
             entry = manifest.get(str(q['n']), {})
             if not entry.get('fallback', True) and entry.get('file'):
-                src = f'{BASE_URL}/{entry["file"]}'
+                # manifest stores 'assets/img/01.webp'; BASE_URL may be ''
+                # (relative, Pages same-origin) or an absolute prefix.
+                src = (f'{BASE_URL}/{entry["file"]}' if BASE_URL
+                       else entry['file'])
                 # NOTE: no loading="lazy" — inside a scroll-snap scroller the
                 # off-screen slides are ~50 viewports away, so lazy images would
                 # never load. Total payload is only ~521 KB, so eager is fine.
@@ -278,7 +300,12 @@ def build():
         '  </section>\n')
 
     parts.append('</div>\n</body>\n</html>\n')
-    out = os.path.join(BASE, 'charades-cdn.html' if MODE == 'cdn' else 'charades-v4.html')
+    # Write to the repo root when this script lives in src/, so the relative
+    # image paths (assets/img/NN.webp) resolve correctly from the HTML file.
+    OUT_DIR = BASE
+    if os.path.basename(BASE) == 'src' and os.path.isdir(os.path.join(BASE, '..', 'assets')):
+        OUT_DIR = os.path.join(BASE, '..')
+    out = os.path.join(OUT_DIR, 'charades-cdn.html' if MODE == 'cdn' else 'charades-v4.html')
     with open(out, 'w', encoding='utf-8') as f:
         f.write(''.join(parts))
     size = os.path.getsize(out)
