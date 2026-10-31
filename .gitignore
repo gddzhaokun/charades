@@ -1,0 +1,13 @@
+# history / diagnostics / scratch — never commit
+history/
+diag/
+shots/
+__pycache__/
+*.pyc
+b64.json
+session_dump.txt
+*.log
+
+# NOTE: assets/img/manifest.json IS tracked on purpose — it maps every
+# question number to its image file and records fallback status, so the
+# image set stays traceable.
