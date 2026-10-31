@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#e8ecf3">
+<title>你来比划我来猜 · 50 题</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:#1a1a2e;-webkit-font-smoothing:antialiased}
+
+/* ---------- pure-CSS page flipping ---------- */
+/* 100vh is UNRELIABLE on mobile: iOS Safari / Android Chrome resize the visual
+   viewport when the address bar shows/hides, so 100vh != visible height.
+   Declare 100vh first (fallback), then 100dvh (dynamic viewport) so supporting
+   browsers use the *actual* visible height. .slide MUST track .scroller exactly
+   or scroll-snap misaligns. */
+.scroller{height:100vh;height:100dvh;width:100%;overflow-y:scroll;scroll-snap-type:y mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-y:contain}
+.scroller::-webkit-scrollbar{display:none}
+
+.slide{height:100vh;height:100dvh;width:100%;scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  /* safe-area on ALL four edges — landscape notched phones inset left/right too */
+  padding:calc(env(safe-area-inset-top,0px) + 52px)
+          calc(env(safe-area-inset-right,0px) + 16px)
+          calc(env(safe-area-inset-bottom,0px) + 44px)
+          calc(env(safe-area-inset-left,0px) + 16px)}
+
+/* ---------- cover ---------- */
+.slide-intro{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
+.slide-intro .big{font-size:clamp(40px,11vw,64px);font-weight:900;letter-spacing:.02em;
+  text-align:center;line-height:1.25;text-shadow:0 6px 24px rgba(0,0,0,.28)}
+.slide-intro .sub{font-size:clamp(15px,4vw,20px);opacity:.95;margin-top:20px;text-align:center;line-height:1.8}
+.slide-intro .chips{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:center;max-width:92%}
+.slide-intro .cchip{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);
+  padding:7px 14px;border-radius:14px;font-size:clamp(12px,3.2vw,15px);font-weight:600;
+  white-space:nowrap;backdrop-filter:blur(6px)}
+.slide-intro .cchip b{font-weight:900;margin-left:2px}
+.slide-intro .scroll-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);
+  font-size:16px;font-weight:700;opacity:.92;letter-spacing:.5px;
+  animation:bounce 1.8s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+
+/* ---------- question slide ---------- */
+.slide-q{background:var(--bg,#f8f9fc);--accent:#666}
+/* cat-badge + counter: same top offset AND same explicit height so their
+   visual centre lines match exactly (previously 16px vs 12px top with
+   different box heights -> visibly misaligned). */
+.cat-badge{position:absolute;top:calc(env(safe-area-inset-top,0px) + 13px);left:0;right:0;
+  height:26px;line-height:26px;padding:0 94px;overflow:hidden;
+  text-align:center;font-size:15px;font-weight:800;color:var(--accent);
+  letter-spacing:1.5px;white-space:nowrap}
+.counter{position:absolute;top:calc(env(safe-area-inset-top,0px) + 13px);
+  right:calc(env(safe-area-inset-right,0px) + 14px);
+  display:inline-flex;align-items:center;height:26px;padding:0 13px;
+  background:var(--accent);color:#fff;border-radius:20px;
+  font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(0,0,0,.13)}
+
+/* illustration: takes the top half of the slide.
+   Images are stored as OPAQUE white-bg WebP (4-5x smaller than alpha WebP);
+   mix-blend-mode:multiply makes pure white resolve to exactly the card
+   background colour, so the white box is invisible (verified by pixel
+   sampling a rendered screenshot: 0 pure-white pixels survive). */
+.illus{width:min(46vh,52vw,250px);height:min(46vh,52vw,250px);
+  width:min(46dvh,52vw,250px);height:min(46dvh,52vw,250px);
+  display:flex;align-items:center;justify-content:center;margin-bottom:clamp(6px,2vh,18px)}
+.illus img{width:100%;height:100%;object-fit:contain;
+  mix-blend-mode:multiply;isolation:isolate}
+.illus .emoji{font-size:min(30vh,38vw,170px);line-height:1}
+
+/* the word — the single most important element on screen */
+.word{font-size:min(19vw,118px);font-size:min(19vw,118px,14dvh);font-weight:900;
+  line-height:1.05;color:#111;
+  letter-spacing:.03em;text-align:center;word-break:keep-all;
+  margin:0 0 clamp(10px,2.4vh,22px);padding:0 4px}
+
+/* hint pills */
+.hint-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:96%}
+.pill{background:#fff;border:1.5px solid rgba(26,26,46,.10);
+  padding:8px 15px;border-radius:16px;font-size:clamp(13px,3.5vw,16px);
+  font-weight:700;color:#333;box-shadow:0 3px 10px rgba(26,26,46,.07);white-space:nowrap}
+
+.foot{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);
+  font-size:13px;color:#5a6478;font-weight:600;letter-spacing:.5px}
+
+/* ---------- end slide ---------- */
+.slide-end{background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%);color:#fff}
+.slide-end .big{font-size:clamp(60px,17vw,96px);line-height:1}
+.slide-end p{font-size:clamp(16px,4.2vw,20px);opacity:.96;margin-top:18px;text-align:center;line-height:1.7}
+
+/* ================= responsive sizing =================
+   The OLD rule was `@media (min-width:600px)` — a pure WIDTH test. A phone in
+   landscape (844x390, 932x430 …) is "wide" but only ~360-430px tall, so it
+   wrongly matched the desktop branch and got .word=150px / .illus=300px,
+   which overflows a 390px-tall slide. Size must follow the SHORTER axis.
+   Strategy: portrait/normal is the base (below); SHORT screens (landscape
+   phones + tiny windows) get a dedicated compact branch keyed on height.
+   Landscape phones are also *height*-constrained, so every length below is
+   `min(<vh term>, <vw term>, <px cap>)` — it can never exceed the short axis. */
+
+/* base portrait tweaks: .illus may shrink if a long word + 3 wrapped pills
+   would overflow; min-height:0 removes the automatic min-content floor so
+   flexbox is allowed to compress it instead of pushing content out of view. */
+.illus{flex:0 1 auto;min-height:0}
+.word,.hint-row{flex:0 0 auto}
+
+/* SHORT viewports — landscape phones (844x390 / 740x360 / 667x375 / 932x430)
+   and short portrait windows (360x480 / 360x520). */
+@media (max-height:520px){
+  .slide{padding:calc(env(safe-area-inset-top,0px) + max(34px,8dvh))
+                 calc(env(safe-area-inset-right,0px) + 14px)
+                 calc(env(safe-area-inset-bottom,0px) + max(26px,7dvh))
+                 calc(env(safe-area-inset-left,0px) + 14px)}
+  .illus{width:min(30dvh,27vw,240px);height:min(30dvh,27vw,240px);
+    margin-bottom:min(2dvh,10px)}
+  .word{font-size:min(17vw,15dvh,90px);margin-bottom:min(2.2dvh,12px)}
+  .pill{font-size:13px;padding:6px 12px;border-radius:14px}
+  .hint-row{gap:6px}
+  .cat-badge{top:calc(env(safe-area-inset-top,0px) + 8px);height:22px;line-height:22px;
+    font-size:13px;letter-spacing:1px;padding:0 82px}
+  .counter{top:calc(env(safe-area-inset-top,0px) + 8px);height:22px;font-size:12px;padding:0 11px}
+  .foot{font-size:11.5px;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)}
+  /* cover / end must also fit a 360px-tall viewport */
+  .slide-intro .big{font-size:clamp(30px,6.4dvh,46px);line-height:1.2}
+  .slide-intro .sub{font-size:13px;margin-top:10px;line-height:1.6}
+  .slide-intro .chips{margin-top:12px;gap:6px}
+  .slide-intro .cchip{padding:5px 10px;font-size:12px}
+  .slide-intro .scroll-hint{font-size:13px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)}
+  .slide-end .big{font-size:clamp(44px,22dvh,72px)}
+  .slide-end p{font-size:15px;margin-top:10px;line-height:1.6}
+}
+
+/* Roomy desktop / tablet windows only — BOTH axes must be comfortable.
+   (min-height guard is what keeps landscape phones out of this branch.) */
+@media (min-width:600px) and (min-height:521px){
+  .word{font-size:min(150px,16dvh)}
+  .illus{width:300px;height:300px}
+}
+</style>
+</head>
+<body>
+<div class="scroller">
+  <section class="slide slide-intro">
+    <div class="big">你来比划<br>我来猜</div>
+    <div class="sub">50 道题 · 一题一屏</div>
+    <div class="chips"><span class="cchip">🐶 动物 <b>12</b></span><span class="cchip">🍕 食物 <b>10</b></span><span class="cchip">⚽ 运动 <b>8</b></span><span class="cchip">👨‍⚕️ 职业 <b>8</b></span><span class="cchip">📱 物品 <b>8</b></span><span class="cchip">🙌 动作 <b>4</b></span></div>
+    <div class="scroll-hint">👆 向上滑动开始</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 1/12</div>
+    <div class="counter">第 1 题</div>
+    <div class="illus"><img alt="大象" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/01.webp" decoding="async"></div>
+    <div class="word">大象</div>
+    <div class="hint-row"><span class="pill">💡 鼻子长</span><span class="pill">💡 耳朵像扇子</span><span class="pill">💡 会喷水</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 2/12</div>
+    <div class="counter">第 2 题</div>
+    <div class="illus"><img alt="熊猫" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/02.webp" decoding="async"></div>
+    <div class="word">熊猫</div>
+    <div class="hint-row"><span class="pill">💡 黑眼圈</span><span class="pill">💡 爱吃竹子</span><span class="pill">💡 国宝</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 3/12</div>
+    <div class="counter">第 3 题</div>
+    <div class="illus"><img alt="蛇" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/03.webp" decoding="async"></div>
+    <div class="word">蛇</div>
+    <div class="hint-row"><span class="pill">💡 没有脚</span><span class="pill">💡 会缠绕</span><span class="pill">💡 吐信子</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 4/12</div>
+    <div class="counter">第 4 题</div>
+    <div class="illus"><img alt="企鹅" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/04.webp" decoding="async"></div>
+    <div class="word">企鹅</div>
+    <div class="hint-row"><span class="pill">💡 不会飞</span><span class="pill">💡 黑西装</span><span class="pill">💡 南极</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 5/12</div>
+    <div class="counter">第 5 题</div>
+    <div class="illus"><img alt="长颈鹿" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/05.webp" decoding="async"></div>
+    <div class="word">长颈鹿</div>
+    <div class="hint-row"><span class="pill">💡 脖子长</span><span class="pill">💡 身上有斑</span><span class="pill">💡 树叶</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 6/12</div>
+    <div class="counter">第 6 题</div>
+    <div class="illus"><img alt="章鱼" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/06.webp" decoding="async"></div>
+    <div class="word">章鱼</div>
+    <div class="hint-row"><span class="pill">💡 八条腿</span><span class="pill">💡 会喷墨</span><span class="pill">💡 海底</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 7/12</div>
+    <div class="counter">第 7 题</div>
+    <div class="illus"><img alt="海豚" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/07.webp" decoding="async"></div>
+    <div class="word">海豚</div>
+    <div class="hint-row"><span class="pill">💡 聪明</span><span class="pill">💡 会顶球</span><span class="pill">💡 海洋馆</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 8/12</div>
+    <div class="counter">第 8 题</div>
+    <div class="illus"><img alt="螃蟹" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/08.webp" decoding="async"></div>
+    <div class="word">螃蟹</div>
+    <div class="hint-row"><span class="pill">💡 横着走</span><span class="pill">💡 两个钳</span><span class="pill">💡 蒸着吃</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 9/12</div>
+    <div class="counter">第 9 题</div>
+    <div class="illus"><img alt="猫" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/09.webp" decoding="async"></div>
+    <div class="word">猫</div>
+    <div class="hint-row"><span class="pill">💡 抓老鼠</span><span class="pill">💡 喵喵叫</span><span class="pill">💡 爱睡</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 10/12</div>
+    <div class="counter">第 10 题</div>
+    <div class="illus"><img alt="猪" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/10.webp" decoding="async"></div>
+    <div class="word">猪</div>
+    <div class="hint-row"><span class="pill">💡 粉色</span><span class="pill">💡 拱鼻子</span><span class="pill">💡 懒</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 11/12</div>
+    <div class="counter">第 11 题</div>
+    <div class="illus"><img alt="老虎" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/11.webp" decoding="async"></div>
+    <div class="word">老虎</div>
+    <div class="hint-row"><span class="pill">💡 大王</span><span class="pill">💡 条纹</span><span class="pill">💡 森林</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
+    <div class="cat-badge">🐶 动物 · 12/12</div>
+    <div class="counter">第 12 题</div>
+    <div class="illus"><img alt="兔子" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/12.webp" decoding="async"></div>
+    <div class="word">兔子</div>
+    <div class="hint-row"><span class="pill">💡 长耳朵</span><span class="pill">💡 蹦蹦跳</span><span class="pill">💡 爱吃萝卜</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 1/10</div>
+    <div class="counter">第 13 题</div>
+    <div class="illus"><img alt="饺子" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/13.webp" decoding="async"></div>
+    <div class="word">饺子</div>
+    <div class="hint-row"><span class="pill">💡 过年吃</span><span class="pill">💡 面皮包馅</span><span class="pill">💡 蘸醋</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 2/10</div>
+    <div class="counter">第 14 题</div>
+    <div class="illus"><img alt="披萨" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/14.webp" decoding="async"></div>
+    <div class="word">披萨</div>
+    <div class="hint-row"><span class="pill">💡 意大利</span><span class="pill">💡 三角块</span><span class="pill">💡 芝士</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 3/10</div>
+    <div class="counter">第 15 题</div>
+    <div class="illus"><img alt="火锅" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/15.webp" decoding="async"></div>
+    <div class="word">火锅</div>
+    <div class="hint-row"><span class="pill">💡 四川</span><span class="pill">💡 涮着吃</span><span class="pill">💡 辣</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 4/10</div>
+    <div class="counter">第 16 题</div>
+    <div class="illus"><img alt="冰淇淋" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/16.webp" decoding="async"></div>
+    <div class="word">冰淇淋</div>
+    <div class="hint-row"><span class="pill">💡 夏天吃</span><span class="pill">💡 会化</span><span class="pill">💡 甜的</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 5/10</div>
+    <div class="counter">第 17 题</div>
+    <div class="illus"><img alt="汉堡" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/17.webp" decoding="async"></div>
+    <div class="word">汉堡</div>
+    <div class="hint-row"><span class="pill">💡 两层</span><span class="pill">💡 夹肉</span><span class="pill">💡 麦当劳</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 6/10</div>
+    <div class="counter">第 18 题</div>
+    <div class="illus"><img alt="拉面" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/18.webp" decoding="async"></div>
+    <div class="word">拉面</div>
+    <div class="hint-row"><span class="pill">💡 日本</span><span class="pill">💡 长长的</span><span class="pill">💡 汤</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 7/10</div>
+    <div class="counter">第 19 题</div>
+    <div class="illus"><img alt="烤鸭" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/19.webp" decoding="async"></div>
+    <div class="word">烤鸭</div>
+    <div class="hint-row"><span class="pill">💡 北京</span><span class="pill">💡 卷饼吃</span><span class="pill">💡 脆皮</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 8/10</div>
+    <div class="counter">第 20 题</div>
+    <div class="illus"><img alt="咖啡" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/20.webp" decoding="async"></div>
+    <div class="word">咖啡</div>
+    <div class="hint-row"><span class="pill">💡 提神</span><span class="pill">💡 苦的</span><span class="pill">💡 白领爱</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 9/10</div>
+    <div class="counter">第 21 题</div>
+    <div class="illus"><img alt="啤酒" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/21.webp" decoding="async"></div>
+    <div class="word">啤酒</div>
+    <div class="hint-row"><span class="pill">💡 夏天</span><span class="pill">💡 配炸鸡</span><span class="pill">💡 麦香</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q food" style="--accent:#ff922b;--bg:#fff8f0">
+    <div class="cat-badge">🍕 食物 · 10/10</div>
+    <div class="counter">第 22 题</div>
+    <div class="illus"><img alt="西瓜" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/22.webp" decoding="async"></div>
+    <div class="word">西瓜</div>
+    <div class="hint-row"><span class="pill">💡 夏天</span><span class="pill">💡 籽</span><span class="pill">💡 绿皮红肉</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 1/8</div>
+    <div class="counter">第 23 题</div>
+    <div class="illus"><img alt="乒乓球" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/23.webp" decoding="async"></div>
+    <div class="word">乒乓球</div>
+    <div class="hint-row"><span class="pill">💡 国球</span><span class="pill">💡 小</span><span class="pill">💡 推挡</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 2/8</div>
+    <div class="counter">第 24 题</div>
+    <div class="illus"><img alt="游泳" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/24.webp" decoding="async"></div>
+    <div class="word">游泳</div>
+    <div class="hint-row"><span class="pill">💡 夏天</span><span class="pill">💡 换气</span><span class="pill">💡 泳镜</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 3/8</div>
+    <div class="counter">第 25 题</div>
+    <div class="illus"><img alt="足球" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/25.webp" decoding="async"></div>
+    <div class="word">足球</div>
+    <div class="hint-row"><span class="pill">💡 世界杯</span><span class="pill">💡 11人</span><span class="pill">💡 梅西</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 4/8</div>
+    <div class="counter">第 26 题</div>
+    <div class="illus"><img alt="跳绳" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/26.webp" decoding="async"></div>
+    <div class="word">跳绳</div>
+    <div class="hint-row"><span class="pill">💡 校园</span><span class="pill">💡 摇绳</span><span class="pill">💡 手脚并用</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 5/8</div>
+    <div class="counter">第 27 题</div>
+    <div class="illus"><img alt="打太极" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/27.webp" decoding="async"></div>
+    <div class="word">打太极</div>
+    <div class="hint-row"><span class="pill">💡 老人</span><span class="pill">💡 慢</span><span class="pill">💡 推手</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 6/8</div>
+    <div class="counter">第 28 题</div>
+    <div class="illus"><img alt="瑜伽" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/28.webp" decoding="async"></div>
+    <div class="word">瑜伽</div>
+    <div class="hint-row"><span class="pill">💡 女的</span><span class="pill">💡 柔韧</span><span class="pill">💡 冥想</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 7/8</div>
+    <div class="counter">第 29 题</div>
+    <div class="illus"><img alt="打羽毛球" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/29.webp" decoding="async"></div>
+    <div class="word">打羽毛球</div>
+    <div class="hint-row"><span class="pill">💡 球拍</span><span class="pill">💡 扣杀</span><span class="pill">💡 李宗伟</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
+    <div class="cat-badge">⚽ 运动 · 8/8</div>
+    <div class="counter">第 30 题</div>
+    <div class="illus"><img alt="举重" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/30.webp" decoding="async"></div>
+    <div class="word">举重</div>
+    <div class="hint-row"><span class="pill">💡 力气</span><span class="pill">💡 杠铃</span><span class="pill">💡 吕小军</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 1/8</div>
+    <div class="counter">第 31 题</div>
+    <div class="illus"><img alt="医生" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/31.webp" decoding="async"></div>
+    <div class="word">医生</div>
+    <div class="hint-row"><span class="pill">💡 听诊器</span><span class="pill">💡 白大褂</span><span class="pill">💡 救死扶伤</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 2/8</div>
+    <div class="counter">第 32 题</div>
+    <div class="illus"><img alt="厨师" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/32.webp" decoding="async"></div>
+    <div class="word">厨师</div>
+    <div class="hint-row"><span class="pill">💡 炒菜</span><span class="pill">💡 锅</span><span class="pill">💡 颠勺</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 3/8</div>
+    <div class="counter">第 33 题</div>
+    <div class="illus"><img alt="警察" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/33.webp" decoding="async"></div>
+    <div class="word">警察</div>
+    <div class="hint-row"><span class="pill">💡 抓坏人</span><span class="pill">💡 配枪</span><span class="pill">💡 帅</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 4/8</div>
+    <div class="counter">第 34 题</div>
+    <div class="illus"><img alt="老师" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/34.webp" decoding="async"></div>
+    <div class="word">老师</div>
+    <div class="hint-row"><span class="pill">💡 粉笔</span><span class="pill">💡 上课</span><span class="pill">💡 教书</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 5/8</div>
+    <div class="counter">第 35 题</div>
+    <div class="illus"><img alt="快递员" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/35.webp" decoding="async"></div>
+    <div class="word">快递员</div>
+    <div class="hint-row"><span class="pill">💡 送货</span><span class="pill">💡 三轮车</span><span class="pill">💡 扫码</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 6/8</div>
+    <div class="counter">第 36 题</div>
+    <div class="illus"><img alt="理发师" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/36.webp" decoding="async"></div>
+    <div class="word">理发师</div>
+    <div class="hint-row"><span class="pill">💡 剪刀</span><span class="pill">💡 吹风机</span><span class="pill">💡 洗剪吹</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 7/8</div>
+    <div class="counter">第 37 题</div>
+    <div class="illus"><img alt="飞行员" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/37.webp" decoding="async"></div>
+    <div class="word">飞行员</div>
+    <div class="hint-row"><span class="pill">💡 开飞机</span><span class="pill">💡 机长</span><span class="pill">💡 蓝天</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
+    <div class="cat-badge">👨‍⚕️ 职业 · 8/8</div>
+    <div class="counter">第 38 题</div>
+    <div class="illus"><img alt="消防员" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/38.webp" decoding="async"></div>
+    <div class="word">消防员</div>
+    <div class="hint-row"><span class="pill">💡 救火</span><span class="pill">💡 水管</span><span class="pill">💡 橙衣服</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 1/8</div>
+    <div class="counter">第 39 题</div>
+    <div class="illus"><img alt="手机" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/39.webp" decoding="async"></div>
+    <div class="word">手机</div>
+    <div class="hint-row"><span class="pill">💡 刷抖音</span><span class="pill">💡 充电</span><span class="pill">💡 微信</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 2/8</div>
+    <div class="counter">第 40 题</div>
+    <div class="illus"><img alt="雨伞" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/40.webp" decoding="async"></div>
+    <div class="word">雨伞</div>
+    <div class="hint-row"><span class="pill">💡 下雨</span><span class="pill">💡 撑</span><span class="pill">💡 湿</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 3/8</div>
+    <div class="counter">第 41 题</div>
+    <div class="illus"><img alt="眼镜" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/41.webp" decoding="async"></div>
+    <div class="word">眼镜</div>
+    <div class="hint-row"><span class="pill">💡 近视</span><span class="pill">💡 两个圈</span><span class="pill">💡 架在鼻子上</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 4/8</div>
+    <div class="counter">第 42 题</div>
+    <div class="illus"><img alt="钥匙" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/42.webp" decoding="async"></div>
+    <div class="word">钥匙</div>
+    <div class="hint-row"><span class="pill">💡 开门</span><span class="pill">💡 金属</span><span class="pill">💡 丢了急</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 5/8</div>
+    <div class="counter">第 43 题</div>
+    <div class="illus"><img alt="冰箱" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/43.webp" decoding="async"></div>
+    <div class="word">冰箱</div>
+    <div class="hint-row"><span class="pill">💡 制冷</span><span class="pill">💡 放菜</span><span class="pill">💡 保鲜</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 6/8</div>
+    <div class="counter">第 44 题</div>
+    <div class="illus"><img alt="空调" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/44.webp" decoding="async"></div>
+    <div class="word">空调</div>
+    <div class="hint-row"><span class="pill">💡 夏天</span><span class="pill">💡 制冷</span><span class="pill">💡 遥控</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 7/8</div>
+    <div class="counter">第 45 题</div>
+    <div class="illus"><img alt="电视" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/45.webp" decoding="async"></div>
+    <div class="word">电视</div>
+    <div class="hint-row"><span class="pill">💡 看新闻</span><span class="pill">💡 屏幕</span><span class="pill">💡 遥控</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
+    <div class="cat-badge">📱 物品 · 8/8</div>
+    <div class="counter">第 46 题</div>
+    <div class="illus"><img alt="牙刷" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/46.webp" decoding="async"></div>
+    <div class="word">牙刷</div>
+    <div class="hint-row"><span class="pill">💡 刷牙</span><span class="pill">💡 牙膏</span><span class="pill">💡 早晚</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
+    <div class="cat-badge">🙌 动作 · 1/4</div>
+    <div class="counter">第 47 题</div>
+    <div class="illus"><img alt="刷牙" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/47.webp" decoding="async"></div>
+    <div class="word">刷牙</div>
+    <div class="hint-row"><span class="pill">💡 上下动</span><span class="pill">💡 嘴里</span><span class="pill">💡 每天两次</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
+    <div class="cat-badge">🙌 动作 · 2/4</div>
+    <div class="counter">第 48 题</div>
+    <div class="illus"><img alt="开车" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/48.webp" decoding="async"></div>
+    <div class="word">开车</div>
+    <div class="hint-row"><span class="pill">💡 方向盘</span><span class="pill">💡 坐姿</span><span class="pill">💡 看路</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
+    <div class="cat-badge">🙌 动作 · 3/4</div>
+    <div class="counter">第 49 题</div>
+    <div class="illus"><img alt="弹吉他" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/49.webp" decoding="async"></div>
+    <div class="word">弹吉他</div>
+    <div class="hint-row"><span class="pill">💡 拨弦</span><span class="pill">💡 挎胸前</span><span class="pill">💡 唱歌</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
+    <div class="cat-badge">🙌 动作 · 4/4</div>
+    <div class="counter">第 50 题</div>
+    <div class="illus"><img alt="打篮球" src="https://raw.githubusercontent.com/gddzhaokun/charades/main/assets/img/50.webp" decoding="async"></div>
+    <div class="word">打篮球</div>
+    <div class="hint-row"><span class="pill">💡 拍球</span><span class="pill">💡 投篮</span><span class="pill">💡 帅</span></div>
+    <div class="foot">你比划 · 朋友猜</div>
+  </section>
+  <section class="slide slide-end">
+    <div class="big">🎉</div>
+    <p>全部 50 题完成！<br>换个人再来一轮 →</p>
+  </section>
+</div>
+</body>
+</html>
