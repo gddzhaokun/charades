@@ -164,6 +164,11 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   line-height:1.05;color:#111;
   letter-spacing:.03em;text-align:center;word-break:keep-all;
   margin:0 0 clamp(10px,2.4vh,22px);padding:0 4px}
+/* long adjective-prefix phrases (v3): shrink + allow wrapping.
+   keep-all above would force a 6-9 char phrase onto ONE line at 19vw,
+   overflowing narrow phones — measured in v6 verify (badWordFit=19). */
+.word--long{font-size:min(12vw,66px,13dvh);line-height:1.18;
+  letter-spacing:.02em;word-break:normal;overflow-wrap:anywhere}
 
 /* hint pills */
 .hint-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:96%}
@@ -197,6 +202,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
 
 /* SHORT viewports — landscape phones (844x390 / 740x360 / 667x375 / 932x430)
    and short portrait windows (360x480 / 360x520). */
+/* v3 long-phrase override for short viewports */
 @media (max-height:520px){
   .slide{padding:calc(env(safe-area-inset-top,0px) + max(34px,8dvh))
                  calc(env(safe-area-inset-right,0px) + 14px)
@@ -205,6 +211,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   .illus{width:min(30dvh,27vw,240px);height:min(30dvh,27vw,240px);
     margin-bottom:min(2dvh,10px)}
   .word{font-size:min(17vw,15dvh,90px);margin-bottom:min(2.2dvh,12px)}
+  .word--long{font-size:min(9.5vw,46px,11dvh);margin-bottom:min(2.2dvh,12px)}
   .pill{font-size:13px;padding:6px 12px;border-radius:14px}
   .hint-row{gap:6px}
   .cat-badge{top:calc(env(safe-area-inset-top,0px) + 8px);height:22px;line-height:22px;
@@ -225,6 +232,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
    (min-height guard is what keeps landscape phones out of this branch.) */
 @media (min-width:600px) and (min-height:521px){
   .word{font-size:min(150px,16dvh)}
+  .word--long{font-size:min(92px,15dvh)}
   .illus{width:300px;height:300px}
 }
 """
@@ -283,12 +291,13 @@ def build():
 
         pills = ''.join(f'<span class="pill">💡 {esc(p)}</span>' for p in q['pills'])
 
+        word_cls = 'word--long' if len(q['word']) > 4 else 'word'
         parts.append(
             f'  <section class="slide slide-q {cat}" style="--accent:{accent};--bg:{bg}">\n'
             f'    <div class="cat-badge">{esc(badge)}</div>\n'
             f'    <div class="counter">第 {q["n"]} 题</div>\n'
             f'    <div class="illus">{illus}</div>\n'
-            f'    <div class="word">{esc(q["word"])}</div>\n'
+            f'    <div class="{word_cls}">{esc(q["word"])}</div>\n'
             f'    <div class="hint-row">{pills}</div>\n'
             '    <div class="foot">你比划 · 朋友猜</div>\n'
             '  </section>\n')

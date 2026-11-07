@@ -18,3 +18,6 @@ prompts-v2-new.json
 prompts-v*-backup.json
 prompts-v2-new.json
 questions-v1-backup.json
+diag-v6*
+verify_v6*.py
+src/backup/

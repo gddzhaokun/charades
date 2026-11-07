@@ -79,6 +79,11 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   line-height:1.05;color:#111;
   letter-spacing:.03em;text-align:center;word-break:keep-all;
   margin:0 0 clamp(10px,2.4vh,22px);padding:0 4px}
+/* long adjective-prefix phrases (v3): shrink + allow wrapping.
+   keep-all above would force a 6-9 char phrase onto ONE line at 19vw,
+   overflowing narrow phones — measured in v6 verify (badWordFit=19). */
+.word--long{font-size:min(12vw,66px,13dvh);line-height:1.18;
+  letter-spacing:.02em;word-break:normal;overflow-wrap:anywhere}
 
 /* hint pills */
 .hint-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:96%}
@@ -112,6 +117,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
 
 /* SHORT viewports — landscape phones (844x390 / 740x360 / 667x375 / 932x430)
    and short portrait windows (360x480 / 360x520). */
+/* v3 long-phrase override for short viewports */
 @media (max-height:520px){
   .slide{padding:calc(env(safe-area-inset-top,0px) + max(34px,8dvh))
                  calc(env(safe-area-inset-right,0px) + 14px)
@@ -120,6 +126,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   .illus{width:min(30dvh,27vw,240px);height:min(30dvh,27vw,240px);
     margin-bottom:min(2dvh,10px)}
   .word{font-size:min(17vw,15dvh,90px);margin-bottom:min(2.2dvh,12px)}
+  .word--long{font-size:min(9.5vw,46px,11dvh);margin-bottom:min(2.2dvh,12px)}
   .pill{font-size:13px;padding:6px 12px;border-radius:14px}
   .hint-row{gap:6px}
   .cat-badge{top:calc(env(safe-area-inset-top,0px) + 8px);height:22px;line-height:22px;
@@ -140,6 +147,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
    (min-height guard is what keeps landscape phones out of this branch.) */
 @media (min-width:600px) and (min-height:521px){
   .word{font-size:min(150px,16dvh)}
+  .word--long{font-size:min(92px,15dvh)}
   .illus{width:300px;height:300px}
 }
 </style>
@@ -155,9 +163,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 1/10</div>
     <div class="counter">第 1 题</div>
-    <div class="illus"><img alt="猴子" src="assets/img/01.webp" decoding="async"></div>
-    <div class="word">猴子</div>
-    <div class="hint-row"><span class="pill">💡 会爬树</span><span class="pill">💡 爱吃香蕉</span><span class="pill">💡 挠痒痒</span></div>
+    <div class="illus"><img alt="贪吃的猴子" src="assets/img/01.webp" decoding="async"></div>
+    <div class="word--long">贪吃的猴子</div>
+    <div class="hint-row"><span class="pill">💡 抢过香蕉塞进嘴里</span><span class="pill">💡 两边腮帮子塞满</span><span class="pill">💡 吃饱了拍拍肚皮</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
@@ -171,9 +179,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 3/10</div>
     <div class="counter">第 3 题</div>
-    <div class="illus"><img alt="恐龙" src="assets/img/03.webp" decoding="async"></div>
-    <div class="word">恐龙</div>
-    <div class="hint-row"><span class="pill">💡 史前动物</span><span class="pill">💡 巨大</span><span class="pill">💡 电影里常出现</span></div>
+    <div class="illus"><img alt="悠闲散步的恐龙" src="assets/img/03.webp" decoding="async"></div>
+    <div class="word--long">悠闲散步的恐龙</div>
+    <div class="hint-row"><span class="pill">💡 迈着慢悠悠的大步</span><span class="pill">💡 巨大的身体晃啊晃</span><span class="pill">💡 一点都不着急</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
@@ -187,17 +195,17 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 5/10</div>
     <div class="counter">第 5 题</div>
-    <div class="illus"><img alt="长颈鹿" src="assets/img/05.webp" decoding="async"></div>
-    <div class="word">长颈鹿</div>
-    <div class="hint-row"><span class="pill">💡 脖子超长</span><span class="pill">💡 身上有花纹</span><span class="pill">💡 吃树叶</span></div>
+    <div class="illus"><img alt="脖子快断掉的长颈鹿" src="assets/img/05.webp" decoding="async"></div>
+    <div class="word--long">脖子快断掉的长颈鹿</div>
+    <div class="hint-row"><span class="pill">💡 拼命伸长脖子</span><span class="pill">💡 踮脚够高处的树叶</span><span class="pill">💡 仰着头看天</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 6/10</div>
     <div class="counter">第 6 题</div>
-    <div class="illus"><img alt="猫头鹰" src="assets/img/06.webp" decoding="async"></div>
-    <div class="word">猫头鹰</div>
-    <div class="hint-row"><span class="pill">💡 白天睡觉</span><span class="pill">💡 晚上活动</span><span class="pill">💡 会转头</span></div>
+    <div class="illus"><img alt="犯困的猫头鹰" src="assets/img/06.webp" decoding="async"></div>
+    <div class="word--long">犯困的猫头鹰</div>
+    <div class="hint-row"><span class="pill">💡 眼皮打架打瞌睡</span><span class="pill">💡 晚上才精神</span><span class="pill">💡 脑袋一点一点</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
@@ -211,9 +219,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 8/10</div>
     <div class="counter">第 8 题</div>
-    <div class="illus"><img alt="大象" src="assets/img/08.webp" decoding="async"></div>
-    <div class="word">大象</div>
-    <div class="hint-row"><span class="pill">💡 鼻子长</span><span class="pill">💡 耳朵像扇子</span><span class="pill">💡 会喷水</span></div>
+    <div class="illus"><img alt="喷水的大象" src="assets/img/08.webp" decoding="async"></div>
+    <div class="word--long">喷水的大象</div>
+    <div class="hint-row"><span class="pill">💡 长鼻子吸满水</span><span class="pill">💡 鼻子一甩水花四溅</span><span class="pill">💡 洗了个痛快澡</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
@@ -227,17 +235,17 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q animal" style="--accent:#ff6b9d;--bg:#fff0f5">
     <div class="cat-badge">🐶 动物 · 10/10</div>
     <div class="counter">第 10 题</div>
-    <div class="illus"><img alt="袋鼠" src="assets/img/10.webp" decoding="async"></div>
-    <div class="word">袋鼠</div>
-    <div class="hint-row"><span class="pill">💡 肚子有口袋</span><span class="pill">💡 蹦蹦跳跳</span><span class="pill">💡 拳击姿势</span></div>
+    <div class="illus"><img alt="准备打拳的袋鼠" src="assets/img/10.webp" decoding="async"></div>
+    <div class="word--long">准备打拳的袋鼠</div>
+    <div class="hint-row"><span class="pill">💡 两只拳头举起来</span><span class="pill">💡 蹦蹦跳跳找对手</span><span class="pill">💡 肚子有个口袋</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 1/10</div>
     <div class="counter">第 11 题</div>
-    <div class="illus"><img alt="宇航员" src="assets/img/11.webp" decoding="async"></div>
-    <div class="word">宇航员</div>
-    <div class="hint-row"><span class="pill">💡 穿太空服</span><span class="pill">💡 在空间站工作</span><span class="pill">💡 会失重漂浮</span></div>
+    <div class="illus"><img alt="飘在太空的宇航员" src="assets/img/11.webp" decoding="async"></div>
+    <div class="word--long">飘在太空的宇航员</div>
+    <div class="hint-row"><span class="pill">💡 整个人悬浮起来</span><span class="pill">💡 穿着笨重的太空服</span><span class="pill">💡 慢慢翻个跟头</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
@@ -251,9 +259,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 3/10</div>
     <div class="counter">第 13 题</div>
-    <div class="illus"><img alt="厨师" src="assets/img/13.webp" decoding="async"></div>
-    <div class="word">厨师</div>
-    <div class="hint-row"><span class="pill">💡 戴高帽</span><span class="pill">💡 颠勺炒菜</span><span class="pill">💡 做饭好吃</span></div>
+    <div class="illus"><img alt="颠勺的厨师" src="assets/img/13.webp" decoding="async"></div>
+    <div class="word--long">颠勺的厨师</div>
+    <div class="hint-row"><span class="pill">💡 锅往上抛接住</span><span class="pill">💡 手腕一抖一抖</span><span class="pill">💡 戴高帽系围裙</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
@@ -267,9 +275,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 5/10</div>
     <div class="counter">第 15 题</div>
-    <div class="illus"><img alt="守门员" src="assets/img/15.webp" decoding="async"></div>
-    <div class="word">守门员</div>
-    <div class="hint-row"><span class="pill">💡 守球门</span><span class="pill">💡 戴手套</span><span class="pill">💡 扑球</span></div>
+    <div class="illus"><img alt="扑出点球的守门员" src="assets/img/15.webp" decoding="async"></div>
+    <div class="word--long">扑出点球的守门员</div>
+    <div class="hint-row"><span class="pill">💡 整个人飞扑出去</span><span class="pill">💡 张开双手挡球</span><span class="pill">💡 守住最后一道门</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
@@ -283,9 +291,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 7/10</div>
     <div class="counter">第 17 题</div>
-    <div class="illus"><img alt="交警" src="assets/img/17.webp" decoding="async"></div>
-    <div class="word">交警</div>
-    <div class="hint-row"><span class="pill">💡 指挥交通</span><span class="pill">💡 吹哨子</span><span class="pill">💡 站十字路口</span></div>
+    <div class="illus"><img alt="指挥交通的交警" src="assets/img/17.webp" decoding="async"></div>
+    <div class="word--long">指挥交通的交警</div>
+    <div class="hint-row"><span class="pill">💡 手臂打节拍</span><span class="pill">💡 吹哨子</span><span class="pill">💡 站十字路口</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
@@ -299,17 +307,17 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 9/10</div>
     <div class="counter">第 19 题</div>
-    <div class="illus"><img alt="服务员" src="assets/img/19.webp" decoding="async"></div>
-    <div class="word">服务员</div>
-    <div class="hint-row"><span class="pill">💡 端盘子</span><span class="pill">💡 上菜</span><span class="pill">💡 写菜单</span></div>
+    <div class="illus"><img alt="忙不过来的服务员" src="assets/img/19.webp" decoding="async"></div>
+    <div class="word--long">忙不过来的服务员</div>
+    <div class="hint-row"><span class="pill">💡 两只手都端满盘子</span><span class="pill">💡 小跑着穿梭</span><span class="pill">💡 腾不出手</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q job" style="--accent:#51cf66;--bg:#f2fbf4">
     <div class="cat-badge">👨‍⚕️ 职业 · 10/10</div>
     <div class="counter">第 20 题</div>
-    <div class="illus"><img alt="快递员" src="assets/img/20.webp" decoding="async"></div>
-    <div class="word">快递员</div>
-    <div class="hint-row"><span class="pill">💡 送货上门</span><span class="pill">💡 爬楼梯</span><span class="pill">💡 打电话取件</span></div>
+    <div class="illus"><img alt="爬楼送货的快递员" src="assets/img/20.webp" decoding="async"></div>
+    <div class="word--long">爬楼送货的快递员</div>
+    <div class="hint-row"><span class="pill">💡 抱着大箱子爬楼梯</span><span class="pill">💡 按门铃</span><span class="pill">💡 擦汗</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
@@ -323,9 +331,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
     <div class="cat-badge">⚽ 运动 · 2/11</div>
     <div class="counter">第 22 题</div>
-    <div class="illus"><img alt="拔河" src="assets/img/22.webp" decoding="async"></div>
-    <div class="word">拔河</div>
-    <div class="hint-row"><span class="pill">💡 两队拉绳子</span><span class="pill">💡 比力气</span><span class="pill">💡 往后倒</span></div>
+    <div class="illus"><img alt="快输掉的拔河" src="assets/img/22.webp" decoding="async"></div>
+    <div class="word--long">快输掉的拔河</div>
+    <div class="hint-row"><span class="pill">💡 拼命往后倒</span><span class="pill">💡 脚跟站不住了</span><span class="pill">💡 咬牙不松手</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
@@ -347,9 +355,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
     <div class="cat-badge">⚽ 运动 · 5/11</div>
     <div class="counter">第 25 题</div>
-    <div class="illus"><img alt="翻跟头" src="assets/img/25.webp" decoding="async"></div>
-    <div class="word">翻跟头</div>
-    <div class="hint-row"><span class="pill">💡 头朝下</span><span class="pill">💡 转一圈</span><span class="pill">💡 体操动作</span></div>
+    <div class="illus"><img alt="连翻三个跟头" src="assets/img/25.webp" decoding="async"></div>
+    <div class="word--long">连翻三个跟头</div>
+    <div class="hint-row"><span class="pill">💡 头朝下转圈</span><span class="pill">💡 一个接一个不停</span><span class="pill">💡 落地站稳</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
@@ -363,9 +371,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
     <div class="cat-badge">⚽ 运动 · 7/11</div>
     <div class="counter">第 27 题</div>
-    <div class="illus"><img alt="倒立" src="assets/img/27.webp" decoding="async"></div>
-    <div class="word">倒立</div>
-    <div class="hint-row"><span class="pill">💡 双手撑地</span><span class="pill">💡 脚朝上</span><span class="pill">💡 头朝下</span></div>
+    <div class="illus"><img alt="单手倒立" src="assets/img/27.webp" decoding="async"></div>
+    <div class="word">单手倒立</div>
+    <div class="hint-row"><span class="pill">💡 只用一只手撑地</span><span class="pill">💡 另一只手比耶</span><span class="pill">💡 脚朝上头朝下</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
@@ -387,9 +395,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
     <div class="cat-badge">⚽ 运动 · 10/11</div>
     <div class="counter">第 30 题</div>
-    <div class="illus"><img alt="打篮球" src="assets/img/30.webp" decoding="async"></div>
-    <div class="word">打篮球</div>
-    <div class="hint-row"><span class="pill">💡 拍球</span><span class="pill">💡 投篮</span><span class="pill">💡 扣篮</span></div>
+    <div class="illus"><img alt="绝杀时刻的篮球" src="assets/img/30.webp" decoding="async"></div>
+    <div class="word--long">绝杀时刻的篮球</div>
+    <div class="hint-row"><span class="pill">💡 最后几秒投出去</span><span class="pill">💡 全场屏住呼吸</span><span class="pill">💡 球进啦</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q sport" style="--accent:#339af0;--bg:#f0f7ff">
@@ -403,9 +411,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
     <div class="cat-badge">🙌 动作 · 1/16</div>
     <div class="counter">第 32 题</div>
-    <div class="illus"><img alt="打喷嚏" src="assets/img/32.webp" decoding="async"></div>
-    <div class="word">打喷嚏</div>
-    <div class="hint-row"><span class="pill">💡 啊嚏</span><span class="pill">💡 捂住口鼻</span><span class="pill">💡 感冒时会</span></div>
+    <div class="illus"><img alt="忍了很久的喷嚏" src="assets/img/32.webp" decoding="async"></div>
+    <div class="word--long">忍了很久的喷嚏</div>
+    <div class="hint-row"><span class="pill">💡 捂住口鼻憋着</span><span class="pill">💡 鼻子皱起来</span><span class="pill">💡 最后还是打出来</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
@@ -419,9 +427,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
     <div class="cat-badge">🙌 动作 · 3/16</div>
     <div class="counter">第 34 题</div>
-    <div class="illus"><img alt="吃柠檬" src="assets/img/34.webp" decoding="async"></div>
-    <div class="word">吃柠檬</div>
-    <div class="hint-row"><span class="pill">💡 酸得眯眼</span><span class="pill">💡 龇牙咧嘴</span><span class="pill">💡 黄皮水果</span></div>
+    <div class="illus"><img alt="强忍着吃柠檬" src="assets/img/34.webp" decoding="async"></div>
+    <div class="word--long">强忍着吃柠檬</div>
+    <div class="hint-row"><span class="pill">💡 酸得眯眼</span><span class="pill">💡 嘴里咝咝吸凉气</span><span class="pill">💡 表面装没事</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
@@ -451,9 +459,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
     <div class="cat-badge">🙌 动作 · 7/16</div>
     <div class="counter">第 38 题</div>
-    <div class="illus"><img alt="赖床" src="assets/img/38.webp" decoding="async"></div>
-    <div class="word">赖床</div>
-    <div class="hint-row"><span class="pill">💡 闹钟响了</span><span class="pill">💡 不起来</span><span class="pill">💡 赖在被窝</span></div>
+    <div class="illus"><img alt="被拖起床的赖床" src="assets/img/38.webp" decoding="async"></div>
+    <div class="word--long">被拖起床的赖床</div>
+    <div class="hint-row"><span class="pill">💡 赖在被窝不肯起</span><span class="pill">💡 被子裹得紧紧的</span><span class="pill">💡 被人拉起来</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q action" style="--accent:#f59f00;--bg:#fffbf0">
@@ -539,16 +547,16 @@ html,body{height:100%;width:100%;overflow:hidden;background:#e8ecf3;
   <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
     <div class="cat-badge">📱 物品 · 2/3</div>
     <div class="counter">第 49 题</div>
-    <div class="illus"><img alt="扫码支付" src="assets/img/49.webp" decoding="async"></div>
-    <div class="word">扫码支付</div>
-    <div class="hint-row"><span class="pill">💡 拿出手机</span><span class="pill">💡 对准二维码</span><span class="pill">💡 滴一声</span></div>
+    <div class="illus"><img alt="扫码失败的手忙脚乱" src="assets/img/49.webp" decoding="async"></div>
+    <div class="word--long">扫码失败的手忙脚乱</div>
+    <div class="hint-row"><span class="pill">💡 手机晃来晃去对不准</span><span class="pill">💡 滴——失败</span><span class="pill">💡 越急越扫不上</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
   <section class="slide slide-q object" style="--accent:#845ef7;--bg:#f6f3ff">
     <div class="cat-badge">📱 物品 · 3/3</div>
     <div class="counter">第 50 题</div>
     <div class="illus"><img alt="戴VR眼镜" src="assets/img/50.webp" decoding="async"></div>
-    <div class="word">戴VR眼镜</div>
+    <div class="word--long">戴VR眼镜</div>
     <div class="hint-row"><span class="pill">💡 头上绑设备</span><span class="pill">💡 看虚拟世界</span><span class="pill">💡 伸手乱摸</span></div>
     <div class="foot">你比划 · 朋友猜</div>
   </section>
