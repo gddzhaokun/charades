@@ -1,352 +1,352 @@
 [
  {
   "n": 1,
-  "word": "大象",
+  "word": "猴子",
   "cat": "animal",
-  "prompt": "A realistic photograph of an Asian elephant standing, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of 猴子, isolated on white background, 4K photo-realistic",
+  "emoji": "🐵"
  },
  {
   "n": 2,
-  "word": "熊猫",
+  "word": "企鹅",
   "cat": "animal",
-  "prompt": "A realistic photograph of a giant panda eating bamboo, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of 企鹅, isolated on white background, 4K photo-realistic",
+  "emoji": "🐧"
  },
  {
   "n": 3,
-  "word": "蛇",
+  "word": "恐龙",
   "cat": "animal",
-  "prompt": "A realistic photograph of a green snake coiled, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of a Tyrannosaurus rex dinosaur toy model, isolated on white background, 4K photo-realistic",
+  "emoji": "🦖"
  },
  {
   "n": 4,
-  "word": "企鹅",
+  "word": "螃蟹",
   "cat": "animal",
-  "prompt": "A realistic photograph of a penguin standing, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of 螃蟹, isolated on white background, 4K photo-realistic",
+  "emoji": "🦀"
  },
  {
   "n": 5,
   "word": "长颈鹿",
   "cat": "animal",
-  "prompt": "A realistic photograph of a giraffe, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of a giraffe standing full body, isolated on white background, 4K photo-realistic",
+  "emoji": "🦒"
  },
  {
   "n": 6,
-  "word": "章鱼",
+  "word": "猫头鹰",
   "cat": "animal",
-  "prompt": "A realistic photograph of an octopus, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of an owl perched, isolated on white background, 4K photo-realistic",
+  "emoji": "🦉"
  },
  {
   "n": 7,
-  "word": "海豚",
+  "word": "孔雀",
   "cat": "animal",
-  "prompt": "A realistic photograph of a dolphin jumping, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of a peacock with tail feathers fanned open display, isolated on white background, 4K photo-realistic",
+  "emoji": "🦚"
  },
  {
   "n": 8,
-  "word": "螃蟹",
+  "word": "大象",
   "cat": "animal",
-  "prompt": "A realistic photograph of a red crab, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of 大象, isolated on white background, 4K photo-realistic",
+  "emoji": "🐘"
  },
  {
   "n": 9,
-  "word": "猫",
+  "word": "蛇",
   "cat": "animal",
-  "prompt": "A realistic photograph of a cute cat sitting, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of 蛇, isolated on white background, 4K photo-realistic",
+  "emoji": "🐍"
  },
  {
   "n": 10,
-  "word": "猪",
+  "word": "袋鼠",
   "cat": "animal",
-  "prompt": "A realistic photograph of a pink piglet, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "prompt": "A realistic photograph of a kangaroo standing upright, isolated on white background, 4K photo-realistic",
+  "emoji": "🦘"
  },
  {
   "n": 11,
-  "word": "老虎",
-  "cat": "animal",
-  "prompt": "A realistic photograph of a tiger walking, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "word": "宇航员",
+  "cat": "job",
+  "prompt": "A realistic photograph of an astronaut in white spacesuit floating, isolated on white background, 4K photo-realistic",
+  "emoji": "🧑‍🚀"
  },
  {
   "n": 12,
-  "word": "兔子",
-  "cat": "animal",
-  "prompt": "A realistic photograph of a white rabbit, isolated on white background, 4K photo-realistic",
-  "emoji": ""
+  "word": "消防员",
+  "cat": "job",
+  "prompt": "A realistic photograph of 消防员, isolated on white background, 4K photo-realistic",
+  "emoji": "🧑‍🚒"
  },
  {
   "n": 13,
-  "word": "饺子",
-  "cat": "food",
-  "prompt": "A realistic photograph of Chinese dumplings on a plate, isolated on white background, 4K",
-  "emoji": ""
+  "word": "厨师",
+  "cat": "job",
+  "prompt": "A realistic photograph of 厨师, isolated on white background, 4K photo-realistic",
+  "emoji": "👨‍🍳"
  },
  {
   "n": 14,
-  "word": "披萨",
-  "cat": "food",
-  "prompt": "A realistic photograph of a sliced pepperoni pizza, isolated on white background, 4K",
-  "emoji": ""
+  "word": "魔术师",
+  "cat": "job",
+  "prompt": "A realistic photograph of a magician wearing top hat and cape holding a magic wand, isolated on white background, 4K photo-realistic",
+  "emoji": "🧙"
  },
  {
   "n": 15,
-  "word": "火锅",
-  "cat": "food",
-  "prompt": "A realistic photograph of Chinese hot pot with red broth, isolated on white background, 4K",
-  "emoji": ""
+  "word": "守门员",
+  "cat": "job",
+  "prompt": "A realistic photograph of a soccer goalkeeper wearing gloves jumping to catch a football, isolated on white background, 4K photo-realistic",
+  "emoji": "🥅"
  },
  {
   "n": 16,
-  "word": "冰淇淋",
-  "cat": "food",
-  "prompt": "A realistic photograph of an ice cream cone, isolated on white background, 4K",
-  "emoji": ""
+  "word": "老师",
+  "cat": "job",
+  "prompt": "A realistic photograph of 老师, isolated on white background, 4K photo-realistic",
+  "emoji": "👩‍🏫"
  },
  {
   "n": 17,
-  "word": "汉堡",
-  "cat": "food",
-  "prompt": "A realistic photograph of a hamburger, isolated on white background, 4K",
-  "emoji": ""
+  "word": "交警",
+  "cat": "job",
+  "prompt": "A realistic photograph of a traffic police officer directing traffic at a crossing, isolated on white background, 4K photo-realistic",
+  "emoji": "👮"
  },
  {
   "n": 18,
-  "word": "拉面",
-  "cat": "food",
-  "prompt": "A realistic photograph of a Japanese ramen bowl, isolated on white background, 4K",
-  "emoji": ""
+  "word": "医生",
+  "cat": "job",
+  "prompt": "A realistic photograph of 医生, isolated on white background, 4K photo-realistic",
+  "emoji": "🩺"
  },
  {
   "n": 19,
-  "word": "烤鸭",
-  "cat": "food",
-  "prompt": "A realistic photograph of Peking roast duck, isolated on white background, 4K",
-  "emoji": ""
+  "word": "服务员",
+  "cat": "job",
+  "prompt": "A realistic photograph of a waiter carrying a tray of dishes, isolated on white background, 4K photo-realistic",
+  "emoji": "🍽️"
  },
  {
   "n": 20,
-  "word": "咖啡",
-  "cat": "food",
-  "prompt": "A realistic photograph of a coffee cup with latte art, isolated on white background, 4K",
-  "emoji": ""
+  "word": "快递员",
+  "cat": "job",
+  "prompt": "A realistic photograph of a delivery courier with package boxes on a scooter, isolated on white background, 4K photo-realistic",
+  "emoji": "📦"
  },
  {
   "n": 21,
-  "word": "啤酒",
-  "cat": "food",
-  "prompt": "A realistic photograph of a beer mug with foam, isolated on white background, 4K",
-  "emoji": ""
+  "word": "跳绳",
+  "cat": "sport",
+  "prompt": "A realistic photograph of 跳绳, isolated on white background, 4K photo-realistic",
+  "emoji": "🤸"
  },
  {
   "n": 22,
-  "word": "西瓜",
-  "cat": "food",
-  "prompt": "A realistic photograph of a sliced watermelon, isolated on white background, 4K",
-  "emoji": ""
+  "word": "拔河",
+  "cat": "sport",
+  "prompt": "A realistic photograph of a tug of war rope being pulled by two teams of hands, isolated on white background, 4K photo-realistic",
+  "emoji": "🪢"
  },
  {
   "n": 23,
-  "word": "乒乓球",
+  "word": "游泳",
   "cat": "sport",
-  "prompt": "A realistic photograph of a ping pong paddle and ball, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of 游泳, isolated on white background, 4K photo-realistic",
+  "emoji": "🏊"
  },
  {
   "n": 24,
-  "word": "游泳",
+  "word": "滑滑板",
   "cat": "sport",
-  "prompt": "A realistic photograph of a swimmer in a pool, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a skateboard standing on white background, isolated, 4K photo-realistic",
+  "emoji": "🛹"
  },
  {
   "n": 25,
-  "word": "足球",
+  "word": "翻跟头",
   "cat": "sport",
-  "prompt": "A realistic photograph of a soccer ball, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a young gymnast boy doing a forward somersault roll, isolated on white background, 4K photo-realistic",
+  "emoji": "🤸‍♂️"
  },
  {
   "n": 26,
-  "word": "跳绳",
+  "word": "劈叉",
   "cat": "sport",
-  "prompt": "A realistic photograph of a colorful jump rope, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a flexible girl doing a split on the floor, isolated on white background, 4K photo-realistic",
+  "emoji": "🧘‍♀️"
  },
  {
   "n": 27,
-  "word": "打太极",
+  "word": "倒立",
   "cat": "sport",
-  "prompt": "A realistic photograph of an elderly person doing tai chi, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a boy doing a handstand, isolated on white background, 4K photo-realistic",
+  "emoji": "🤸"
  },
  {
   "n": 28,
-  "word": "瑜伽",
+  "word": "骑自行车",
   "cat": "sport",
-  "prompt": "A realistic photograph of a person doing yoga pose, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a child riding a bicycle wearing a helmet, isolated on white background, 4K photo-realistic",
+  "emoji": "🚴"
  },
  {
   "n": 29,
-  "word": "打羽毛球",
+  "word": "打太极",
   "cat": "sport",
-  "prompt": "A realistic photograph of a badminton racket and shuttlecock, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of 打太极, isolated on white background, 4K photo-realistic",
+  "emoji": "🧘"
  },
  {
   "n": 30,
-  "word": "举重",
+  "word": "打篮球",
   "cat": "sport",
-  "prompt": "A realistic photograph of a barbell with weight plates, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of 打篮球, isolated on white background, 4K photo-realistic",
+  "emoji": "🏀"
  },
  {
   "n": 31,
-  "word": "医生",
-  "cat": "job",
-  "prompt": "A realistic photograph of a stethoscope, isolated on white background, 4K",
-  "emoji": ""
+  "word": "踢足球",
+  "cat": "sport",
+  "prompt": "A realistic photograph of a soccer ball, isolated on white background, 4K photo-realistic",
+  "emoji": "⚽"
  },
  {
   "n": 32,
-  "word": "厨师",
-  "cat": "job",
-  "prompt": "A realistic photograph of a chef hat and spatula, isolated on white background, 4K",
-  "emoji": ""
+  "word": "打喷嚏",
+  "cat": "action",
+  "prompt": "A realistic photograph of a child sneezing into a tissue, isolated on white background, 4K photo-realistic",
+  "emoji": "🤧"
  },
  {
   "n": 33,
-  "word": "警察",
-  "cat": "job",
-  "prompt": "A realistic photograph of a police badge, isolated on white background, 4K",
-  "emoji": ""
+  "word": "照镜子",
+  "cat": "action",
+  "prompt": "A realistic photograph of a small girl looking at herself in a hand mirror, isolated on white background, 4K photo-realistic",
+  "emoji": "🪞"
  },
  {
   "n": 34,
-  "word": "老师",
-  "cat": "job",
-  "prompt": "A realistic photograph of chalk and a red apple, isolated on white background, 4K",
-  "emoji": ""
+  "word": "吃柠檬",
+  "cat": "action",
+  "prompt": "A realistic photograph of a fresh yellow lemon cut in half, isolated on white background, 4K photo-realistic",
+  "emoji": "🍋"
  },
  {
   "n": 35,
-  "word": "快递员",
-  "cat": "job",
-  "prompt": "A realistic photograph of a cardboard delivery box, isolated on white background, 4K",
-  "emoji": ""
+  "word": "被蚊子咬",
+  "cat": "action",
+  "prompt": "A realistic photograph of a mosquito close up macro, isolated on white background, 4K photo-realistic",
+  "emoji": "🦟"
  },
  {
   "n": 36,
-  "word": "理发师",
-  "cat": "job",
-  "prompt": "A realistic photograph of scissors and a comb, isolated on white background, 4K",
-  "emoji": ""
+  "word": "理发",
+  "cat": "action",
+  "prompt": "A realistic photograph of a barber pole and scissors and comb for hair cutting, isolated on white background, 4K photo-realistic",
+  "emoji": "💈"
  },
  {
   "n": 37,
-  "word": "飞行员",
-  "cat": "job",
-  "prompt": "A realistic photograph of an aviator cap and goggles, isolated on white background, 4K",
-  "emoji": ""
+  "word": "接电话",
+  "cat": "action",
+  "prompt": "A realistic photograph of a smartphone ringing with an incoming call screen, isolated on white background, 4K photo-realistic",
+  "emoji": "📞"
  },
  {
   "n": 38,
-  "word": "消防员",
-  "cat": "job",
-  "prompt": "A realistic photograph of a red firefighter helmet, isolated on white background, 4K",
-  "emoji": ""
+  "word": "赖床",
+  "cat": "action",
+  "prompt": "A realistic photograph of a cozy bed pillow with an alarm clock, isolated on white background, 4K photo-realistic",
+  "emoji": "🛏️"
  },
  {
   "n": 39,
-  "word": "手机",
-  "cat": "object",
-  "prompt": "A realistic photograph of a smartphone, isolated on white background, 4K",
-  "emoji": ""
+  "word": "吹蜡烛",
+  "cat": "action",
+  "prompt": "A realistic photograph of a birthday cake with lit candles, isolated on white background, 4K photo-realistic",
+  "emoji": "🕯️"
  },
  {
   "n": 40,
-  "word": "雨伞",
-  "cat": "object",
-  "prompt": "A realistic photograph of an open umbrella, isolated on white background, 4K",
-  "emoji": ""
+  "word": "刷牙",
+  "cat": "action",
+  "prompt": "A realistic photograph of 刷牙, isolated on white background, 4K photo-realistic",
+  "emoji": "🪥"
  },
  {
   "n": 41,
-  "word": "眼镜",
-  "cat": "object",
-  "prompt": "A realistic photograph of eyeglasses, isolated on white background, 4K",
-  "emoji": ""
+  "word": "画蛇添足",
+  "cat": "action",
+  "prompt": "A realistic photograph of a drawing of a snake with legs added, crayon drawing on paper, isolated on white background, 4K photo-realistic",
+  "emoji": "🐍"
  },
  {
   "n": 42,
-  "word": "钥匙",
-  "cat": "object",
-  "prompt": "A realistic photograph of a metal key, isolated on white background, 4K",
-  "emoji": ""
+  "word": "守株待兔",
+  "cat": "action",
+  "prompt": "A realistic photograph of a tree stump in a field with a rabbit, isolated on white background, 4K photo-realistic",
+  "emoji": "🌳"
  },
  {
   "n": 43,
-  "word": "冰箱",
-  "cat": "object",
-  "prompt": "A realistic photograph of a refrigerator, isolated on white background, 4K",
-  "emoji": ""
+  "word": "掩耳盗铃",
+  "cat": "action",
+  "prompt": "A realistic photograph of a person covering their ears next to a bronze bell, isolated on white background, 4K photo-realistic",
+  "emoji": "🔔"
  },
  {
   "n": 44,
-  "word": "空调",
-  "cat": "object",
-  "prompt": "A realistic photograph of a wall air conditioner, isolated on white background, 4K",
-  "emoji": ""
+  "word": "狐假虎威",
+  "cat": "action",
+  "prompt": "A realistic photograph of a fox walking in front of a tiger in a forest, isolated on white background, 4K photo-realistic",
+  "emoji": "🦊"
  },
  {
   "n": 45,
-  "word": "电视",
-  "cat": "object",
-  "prompt": "A realistic photograph of a flat screen TV, isolated on white background, 4K",
-  "emoji": ""
+  "word": "井底之蛙",
+  "cat": "action",
+  "prompt": "A realistic photograph of a frog sitting at the bottom of a dry well looking up, isolated on white background, 4K photo-realistic",
+  "emoji": "🐸"
  },
  {
   "n": 46,
-  "word": "牙刷",
-  "cat": "object",
-  "prompt": "A realistic photograph of a toothbrush, isolated on white background, 4K",
-  "emoji": ""
+  "word": "对牛弹琴",
+  "cat": "action",
+  "prompt": "A realistic photograph of a guitar next to a cow, isolated on white background, 4K photo-realistic",
+  "emoji": "🎸"
  },
  {
   "n": 47,
-  "word": "刷牙",
+  "word": "亡羊补牢",
   "cat": "action",
-  "prompt": "A realistic photograph of brushing teeth with toothbrush and toothpaste, isolated on white background, 4K",
-  "emoji": ""
+  "prompt": "A realistic photograph of a wooden fence pen with a sheep inside, isolated on white background, 4K photo-realistic",
+  "emoji": "🐑"
  },
  {
   "n": 48,
-  "word": "开车",
-  "cat": "action",
-  "prompt": "A realistic photograph of a car steering wheel, isolated on white background, 4K",
-  "emoji": ""
+  "word": "自拍",
+  "cat": "object",
+  "prompt": "A realistic photograph of a hand holding a smartphone taking a selfie, isolated on white background, 4K photo-realistic",
+  "emoji": "🤳"
  },
  {
   "n": 49,
-  "word": "弹吉他",
-  "cat": "action",
-  "prompt": "A realistic photograph of an acoustic guitar, isolated on white background, 4K",
-  "emoji": ""
+  "word": "扫码支付",
+  "cat": "object",
+  "prompt": "A realistic photograph of scanning a QR code with a smartphone to pay, isolated on white background, 4K photo-realistic",
+  "emoji": "💳"
  },
  {
   "n": 50,
-  "word": "打篮球",
-  "cat": "action",
-  "prompt": "A realistic photograph of a basketball, isolated on white background, 4K",
-  "emoji": ""
+  "word": "戴VR眼镜",
+  "cat": "object",
+  "prompt": "A realistic photograph of a VR headset virtual reality goggles, isolated on white background, 4K photo-realistic",
+  "emoji": "🥽"
  }
 ]

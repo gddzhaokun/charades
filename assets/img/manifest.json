@@ -1,39 +1,39 @@
 {
  "1": {
-  "word": "大象",
+  "word": "猴子",
   "cat": "animal",
   "file": "assets/img/01.webp",
-  "emoji": "🐘",
+  "emoji": "🐵",
   "fallback": false,
   "reason": "ok",
-  "bytes": 12574
+  "bytes": 14914
  },
  "2": {
-  "word": "熊猫",
-  "cat": "animal",
-  "file": "assets/img/02.webp",
-  "emoji": "🐼",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 19332
- },
- "3": {
-  "word": "蛇",
-  "cat": "animal",
-  "file": "assets/img/03.webp",
-  "emoji": "🐍",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 15652
- },
- "4": {
   "word": "企鹅",
   "cat": "animal",
-  "file": "assets/img/04.webp",
+  "file": "assets/img/02.webp",
   "emoji": "🐧",
   "fallback": false,
   "reason": "ok",
-  "bytes": 4768
+  "bytes": 6952
+ },
+ "3": {
+  "word": "恐龙",
+  "cat": "animal",
+  "file": "assets/img/03.webp",
+  "emoji": "🦖",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 9896
+ },
+ "4": {
+  "word": "螃蟹",
+  "cat": "animal",
+  "file": "assets/img/04.webp",
+  "emoji": "🦀",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 12366
  },
  "5": {
   "word": "长颈鹿",
@@ -42,411 +42,411 @@
   "emoji": "🦒",
   "fallback": false,
   "reason": "ok",
-  "bytes": 8370
+  "bytes": 6642
  },
  "6": {
-  "word": "章鱼",
+  "word": "猫头鹰",
   "cat": "animal",
   "file": "assets/img/06.webp",
-  "emoji": "🐙",
+  "emoji": "🦉",
   "fallback": false,
   "reason": "ok",
-  "bytes": 21698
+  "bytes": 13400
  },
  "7": {
-  "word": "海豚",
+  "word": "孔雀",
   "cat": "animal",
   "file": "assets/img/07.webp",
-  "emoji": "🐬",
+  "emoji": "🦚",
   "fallback": false,
   "reason": "ok",
-  "bytes": 4368
+  "bytes": 31596
  },
  "8": {
-  "word": "螃蟹",
+  "word": "大象",
   "cat": "animal",
   "file": "assets/img/08.webp",
-  "emoji": "🦀",
+  "emoji": "🐘",
   "fallback": false,
   "reason": "ok",
-  "bytes": 15228
+  "bytes": 14144
  },
  "9": {
-  "word": "猫",
+  "word": "蛇",
   "cat": "animal",
   "file": "assets/img/09.webp",
-  "emoji": "🐱",
+  "emoji": "🐍",
   "fallback": false,
   "reason": "ok",
-  "bytes": 15824
+  "bytes": 9896
  },
  "10": {
-  "word": "猪",
+  "word": "袋鼠",
   "cat": "animal",
   "file": "assets/img/10.webp",
-  "emoji": "🐷",
+  "emoji": "🦘",
   "fallback": false,
   "reason": "ok",
-  "bytes": 10648
+  "bytes": 9754
  },
  "11": {
-  "word": "老虎",
-  "cat": "animal",
+  "word": "宇航员",
+  "cat": "job",
   "file": "assets/img/11.webp",
-  "emoji": "🐯",
+  "emoji": "🧑‍🚀",
   "fallback": false,
   "reason": "ok",
-  "bytes": 25810
+  "bytes": 7148
  },
  "12": {
-  "word": "兔子",
-  "cat": "animal",
-  "file": "assets/img/12.webp",
-  "emoji": "🐰",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 5252
- },
- "13": {
-  "word": "饺子",
-  "cat": "food",
-  "file": "assets/img/13.webp",
-  "emoji": "🥟",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 7864
- },
- "14": {
-  "word": "披萨",
-  "cat": "food",
-  "file": "assets/img/14.webp",
-  "emoji": "🍕",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 38524
- },
- "15": {
-  "word": "火锅",
-  "cat": "food",
-  "file": "assets/img/15.webp",
-  "emoji": "🍲",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 15582
- },
- "16": {
-  "word": "冰淇淋",
-  "cat": "food",
-  "file": "assets/img/16.webp",
-  "emoji": "🍦",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 6076
- },
- "17": {
-  "word": "汉堡",
-  "cat": "food",
-  "file": "assets/img/17.webp",
-  "emoji": "🍔",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 21302
- },
- "18": {
-  "word": "拉面",
-  "cat": "food",
-  "file": "assets/img/18.webp",
-  "emoji": "🍜",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 16258
- },
- "19": {
-  "word": "烤鸭",
-  "cat": "food",
-  "file": "assets/img/19.webp",
-  "emoji": "🦆",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 27894
- },
- "20": {
-  "word": "咖啡",
-  "cat": "food",
-  "file": "assets/img/20.webp",
-  "emoji": "☕",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 7428
- },
- "21": {
-  "word": "啤酒",
-  "cat": "food",
-  "file": "assets/img/21.webp",
-  "emoji": "🍺",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 10606
- },
- "22": {
-  "word": "西瓜",
-  "cat": "food",
-  "file": "assets/img/22.webp",
-  "emoji": "🍉",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 10174
- },
- "23": {
-  "word": "乒乓球",
-  "cat": "sport",
-  "file": "assets/img/23.webp",
-  "emoji": "🏓",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 6252
- },
- "24": {
-  "word": "游泳",
-  "cat": "sport",
-  "file": "assets/img/24.webp",
-  "emoji": "🏊",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 9342
- },
- "25": {
-  "word": "足球",
-  "cat": "sport",
-  "file": "assets/img/25.webp",
-  "emoji": "⚽",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 6604
- },
- "26": {
-  "word": "跳绳",
-  "cat": "sport",
-  "file": "assets/img/26.webp",
-  "emoji": "🤸",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 11262
- },
- "27": {
-  "word": "打太极",
-  "cat": "sport",
-  "file": "assets/img/27.webp",
-  "emoji": "🧘",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 8816
- },
- "28": {
-  "word": "瑜伽",
-  "cat": "sport",
-  "file": "assets/img/28.webp",
-  "emoji": "🧘‍♀️",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 2976
- },
- "29": {
-  "word": "打羽毛球",
-  "cat": "sport",
-  "file": "assets/img/29.webp",
-  "emoji": "🏸",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 3424
- },
- "30": {
-  "word": "举重",
-  "cat": "sport",
-  "file": "assets/img/30.webp",
-  "emoji": "🏋️",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 4850
- },
- "31": {
-  "word": "医生",
-  "cat": "job",
-  "file": "assets/img/31.webp",
-  "emoji": "🩺",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 5986
- },
- "32": {
-  "word": "厨师",
-  "cat": "job",
-  "file": "assets/img/32.webp",
-  "emoji": "👨‍🍳",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 4674
- },
- "33": {
-  "word": "警察",
-  "cat": "job",
-  "file": "assets/img/33.webp",
-  "emoji": "👮",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 25196
- },
- "34": {
-  "word": "老师",
-  "cat": "job",
-  "file": "assets/img/34.webp",
-  "emoji": "👩‍🏫",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 8394
- },
- "35": {
-  "word": "快递员",
-  "cat": "job",
-  "file": "assets/img/35.webp",
-  "emoji": "📦",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 3486
- },
- "36": {
-  "word": "理发师",
-  "cat": "job",
-  "file": "assets/img/36.webp",
-  "emoji": "✂️",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 9304
- },
- "37": {
-  "word": "飞行员",
-  "cat": "job",
-  "file": "assets/img/37.webp",
-  "emoji": "✈️",
-  "fallback": false,
-  "reason": "ok",
-  "bytes": 13128
- },
- "38": {
   "word": "消防员",
   "cat": "job",
-  "file": "assets/img/38.webp",
+  "file": "assets/img/12.webp",
   "emoji": "🧑‍🚒",
   "fallback": false,
   "reason": "ok",
-  "bytes": 10552
+  "bytes": 18770
  },
- "39": {
-  "word": "手机",
-  "cat": "object",
-  "file": "assets/img/39.webp",
-  "emoji": "📱",
+ "13": {
+  "word": "厨师",
+  "cat": "job",
+  "file": "assets/img/13.webp",
+  "emoji": "👨‍🍳",
   "fallback": false,
   "reason": "ok",
-  "bytes": 3026
+  "bytes": 9918
  },
- "40": {
-  "word": "雨伞",
-  "cat": "object",
-  "file": "assets/img/40.webp",
-  "emoji": "☂️",
+ "14": {
+  "word": "魔术师",
+  "cat": "job",
+  "file": "assets/img/14.webp",
+  "emoji": "🧙",
   "fallback": false,
   "reason": "ok",
-  "bytes": 3508
+  "bytes": 10754
  },
- "41": {
-  "word": "眼镜",
-  "cat": "object",
-  "file": "assets/img/41.webp",
-  "emoji": "👓",
+ "15": {
+  "word": "守门员",
+  "cat": "job",
+  "file": "assets/img/15.webp",
+  "emoji": "🥅",
   "fallback": false,
   "reason": "ok",
-  "bytes": 4716
+  "bytes": 7192
  },
- "42": {
-  "word": "钥匙",
-  "cat": "object",
-  "file": "assets/img/42.webp",
-  "emoji": "🔑",
+ "16": {
+  "word": "老师",
+  "cat": "job",
+  "file": "assets/img/16.webp",
+  "emoji": "👩‍🏫",
   "fallback": false,
   "reason": "ok",
-  "bytes": 5526
+  "bytes": 8886
  },
- "43": {
-  "word": "冰箱",
-  "cat": "object",
-  "file": "assets/img/43.webp",
-  "emoji": "🧊",
+ "17": {
+  "word": "交警",
+  "cat": "job",
+  "file": "assets/img/17.webp",
+  "emoji": "👮",
   "fallback": false,
   "reason": "ok",
-  "bytes": 1924
+  "bytes": 8824
  },
- "44": {
-  "word": "空调",
-  "cat": "object",
-  "file": "assets/img/44.webp",
-  "emoji": "❄️",
+ "18": {
+  "word": "医生",
+  "cat": "job",
+  "file": "assets/img/18.webp",
+  "emoji": "🩺",
   "fallback": false,
   "reason": "ok",
-  "bytes": 2910
+  "bytes": 6496
  },
- "45": {
-  "word": "电视",
-  "cat": "object",
-  "file": "assets/img/45.webp",
-  "emoji": "📺",
+ "19": {
+  "word": "服务员",
+  "cat": "job",
+  "file": "assets/img/19.webp",
+  "emoji": "🍽️",
   "fallback": false,
   "reason": "ok",
-  "bytes": 1802
+  "bytes": 6796
  },
- "46": {
-  "word": "牙刷",
-  "cat": "object",
-  "file": "assets/img/46.webp",
-  "emoji": "🪥",
+ "20": {
+  "word": "快递员",
+  "cat": "job",
+  "file": "assets/img/20.webp",
+  "emoji": "📦",
   "fallback": false,
   "reason": "ok",
-  "bytes": 1404
+  "bytes": 11214
  },
- "47": {
-  "word": "刷牙",
-  "cat": "action",
-  "file": "assets/img/47.webp",
-  "emoji": "🪥",
+ "21": {
+  "word": "跳绳",
+  "cat": "sport",
+  "file": "assets/img/21.webp",
+  "emoji": "🤸",
   "fallback": false,
   "reason": "ok",
-  "bytes": 4718
+  "bytes": 5292
  },
- "48": {
-  "word": "开车",
-  "cat": "action",
-  "file": "assets/img/48.webp",
-  "emoji": "🚗",
+ "22": {
+  "word": "拔河",
+  "cat": "sport",
+  "file": "assets/img/22.webp",
+  "emoji": "🪢",
   "fallback": false,
   "reason": "ok",
-  "bytes": 9544
+  "bytes": 7876
  },
- "49": {
-  "word": "弹吉他",
-  "cat": "action",
-  "file": "assets/img/49.webp",
-  "emoji": "🎸",
+ "23": {
+  "word": "游泳",
+  "cat": "sport",
+  "file": "assets/img/23.webp",
+  "emoji": "🏊",
   "fallback": false,
   "reason": "ok",
-  "bytes": 6030
+  "bytes": 5218
  },
- "50": {
+ "24": {
+  "word": "滑滑板",
+  "cat": "sport",
+  "file": "assets/img/24.webp",
+  "emoji": "🛹",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 4556
+ },
+ "25": {
+  "word": "翻跟头",
+  "cat": "sport",
+  "file": "assets/img/25.webp",
+  "emoji": "🤸‍♂️",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5066
+ },
+ "26": {
+  "word": "劈叉",
+  "cat": "sport",
+  "file": "assets/img/26.webp",
+  "emoji": "🧘‍♀️",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5732
+ },
+ "27": {
+  "word": "倒立",
+  "cat": "sport",
+  "file": "assets/img/27.webp",
+  "emoji": "🤸",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5654
+ },
+ "28": {
+  "word": "骑自行车",
+  "cat": "sport",
+  "file": "assets/img/28.webp",
+  "emoji": "🚴",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 12192
+ },
+ "29": {
+  "word": "打太极",
+  "cat": "sport",
+  "file": "assets/img/29.webp",
+  "emoji": "🧘",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 9464
+ },
+ "30": {
   "word": "打篮球",
-  "cat": "action",
-  "file": "assets/img/50.webp",
+  "cat": "sport",
+  "file": "assets/img/30.webp",
   "emoji": "🏀",
   "fallback": false,
   "reason": "ok",
-  "bytes": 33142
+  "bytes": 7174
+ },
+ "31": {
+  "word": "踢足球",
+  "cat": "sport",
+  "file": "assets/img/31.webp",
+  "emoji": "⚽",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 6210
+ },
+ "32": {
+  "word": "打喷嚏",
+  "cat": "action",
+  "file": "assets/img/32.webp",
+  "emoji": "🤧",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 13906
+ },
+ "33": {
+  "word": "照镜子",
+  "cat": "action",
+  "file": "assets/img/33.webp",
+  "emoji": "🪞",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 12784
+ },
+ "34": {
+  "word": "吃柠檬",
+  "cat": "action",
+  "file": "assets/img/34.webp",
+  "emoji": "🍋",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 9588
+ },
+ "35": {
+  "word": "被蚊子咬",
+  "cat": "action",
+  "file": "assets/img/35.webp",
+  "emoji": "🦟",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 3964
+ },
+ "36": {
+  "word": "理发",
+  "cat": "action",
+  "file": "assets/img/36.webp",
+  "emoji": "💈",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 6496
+ },
+ "37": {
+  "word": "接电话",
+  "cat": "action",
+  "file": "assets/img/37.webp",
+  "emoji": "📞",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 3716
+ },
+ "38": {
+  "word": "赖床",
+  "cat": "action",
+  "file": "assets/img/38.webp",
+  "emoji": "🛏️",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5266
+ },
+ "39": {
+  "word": "吹蜡烛",
+  "cat": "action",
+  "file": "assets/img/39.webp",
+  "emoji": "🕯️",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 15590
+ },
+ "40": {
+  "word": "刷牙",
+  "cat": "action",
+  "file": "assets/img/40.webp",
+  "emoji": "🪥",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5862
+ },
+ "41": {
+  "word": "画蛇添足",
+  "cat": "action",
+  "file": "assets/img/41.webp",
+  "emoji": "🐍",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 11250
+ },
+ "42": {
+  "word": "守株待兔",
+  "cat": "action",
+  "file": "assets/img/42.webp",
+  "emoji": "🌳",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 19756
+ },
+ "43": {
+  "word": "掩耳盗铃",
+  "cat": "action",
+  "file": "assets/img/43.webp",
+  "emoji": "🔔",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 14296
+ },
+ "44": {
+  "word": "狐假虎威",
+  "cat": "action",
+  "file": "assets/img/44.webp",
+  "emoji": "🦊",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 28024
+ },
+ "45": {
+  "word": "井底之蛙",
+  "cat": "action",
+  "file": "assets/img/45.webp",
+  "emoji": "🐸",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 20428
+ },
+ "46": {
+  "word": "对牛弹琴",
+  "cat": "action",
+  "file": "assets/img/46.webp",
+  "emoji": "🎸",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 13378
+ },
+ "47": {
+  "word": "亡羊补牢",
+  "cat": "action",
+  "file": "assets/img/47.webp",
+  "emoji": "🐑",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 22754
+ },
+ "48": {
+  "word": "自拍",
+  "cat": "object",
+  "file": "assets/img/48.webp",
+  "emoji": "🤳",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 5078
+ },
+ "49": {
+  "word": "扫码支付",
+  "cat": "object",
+  "file": "assets/img/49.webp",
+  "emoji": "💳",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 9086
+ },
+ "50": {
+  "word": "戴VR眼镜",
+  "cat": "object",
+  "file": "assets/img/50.webp",
+  "emoji": "🥽",
+  "fallback": false,
+  "reason": "ok",
+  "bytes": 3196
  }
 }

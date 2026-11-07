@@ -11,3 +11,10 @@ session_dump.txt
 # NOTE: assets/img/manifest.json IS tracked on purpose — it maps every
 # question number to its image file and records fallback status, so the
 # image set stays traceable.
+src/imgs/
+prompts-v1-backup.json
+questions-v1-backup.json
+prompts-v2-new.json
+prompts-v*-backup.json
+prompts-v2-new.json
+questions-v1-backup.json
